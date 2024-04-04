@@ -1,1 +1,46 @@
-Test text that i hope will appear in a file :P
+comp  = require("component")
+sides = require("sides")
+red = comp.redstone
+robot = require("robot")
+
+itemsSlots = robot.inventroySize()
+robot.select(1)
+
+function unload()
+  x=2
+  while x <. itemSlots do
+    robot.select(x)
+    robot.dropDown(robot.count(x))
+    x = x+1
+  end
+  robot.select(1)
+end
+
+function harvest()
+  robot.useDown(3, false, 1, x)
+end
+
+while true do
+  robot.forward()
+  harvest()
+
+  sigB = red.geyInput(sides.bottom)
+  sigL = red.getInput(sides.left)
+
+  if sigB == 15 then
+    robot.turnLeft()
+  elseif sigL == 15 then
+    unload()
+  elseif robot.compareDown() then
+    robot.turnRight()
+  end
+end
+
+
+
+
+
+
+
+
+
